@@ -1,5 +1,43 @@
-<title>Erreur 404</title>
-<h1>Erreur 404</h1>
-<p>Cette page n'existe sûrement pas, c'est tout ce que nous savons.</p>
-<p>© Alture 2025. Tous droits réservés </p>
-<p>Cabane+</p>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Erreur 404 - Page non trouvée</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glitch {
+      position: relative;
+      color: white;
+      font-size: 6rem;
+      font-weight: bold;
+      animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px red; }
+      25% { text-shadow: -2px -2px blue; }
+      50% { text-shadow: 2px -2px green; }
+      75% { text-shadow: -2px 2px yellow; }
+      100% { text-shadow: 2px 2px red; }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen px-4">
+  <div class="text-center">
+    <div class="glitch">404</div>
+    <h2 class="text-2xl md:text-3xl font-semibold mt-4">Oups ! Page introuvable</h2>
+    <p class="mt-2 text-gray-400">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+    <button onclick="goHome()" class="mt-6 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition duration-300">
+      Retour à l'accueil
+    </button>
+    <div class="mt-10 animate-bounce text-indigo-500 text-sm">🔍 Essayez de vérifier l'URL</div>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = "/";
+    }
+  </script>
+</body>
+</html>
