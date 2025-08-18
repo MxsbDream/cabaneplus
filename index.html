@@ -1,2 +1,113 @@
-<title>Cabane+</title>
-<h1>Cette page est en développement </h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cabane+</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-green-700 text-white sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-bold">Cabanes+</h1>
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="#home" class="hover:text-yellow-300">Accueil</a></li>
+        <li><a href="#cabins" class="hover:text-yellow-300">Nos cabanes</a></li>
+        <li><a href="#booking" class="hover:text-yellow-300">Réserver</a></li>
+      </ul>
+      <button id="menuBtn" class="md:hidden text-white focus:outline-none">
+        ☰
+      </button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4">
+      <a href="#home" class="block py-2">Accueil</a>
+      <a href="#cabins" class="block py-2">Nos cabanes</a>
+      <a href="#booking" class="block py-2">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="bg-cover bg-center h-[60vh] flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');">
+    <div class="bg-black bg-opacity-50 p-8 rounded">
+      <h2 class="text-4xl font-bold mb-4">Évadez-vous dans la nature</h2>
+      <p class="mb-4">Réservez votre cabane de rêve dès aujourd'hui</p>
+      <a href="#booking" class="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-300">Réserver maintenant</a>
+    </div>
+  </section>
+
+  <!-- Cabins Section -->
+  <section id="cabins" class="max-w-7xl mx-auto px-4 py-12">
+    <h3 class="text-3xl font-bold mb-6 text-center">Nos cabanes</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded shadow p-4">
+        <img src="https://images.unsplash.com/photo-1580584126903-6cdbb6c9f9f4" class="rounded mb-4" alt="Cabane 1">
+        <h4 class="text-xl font-semibold">Cabane Forestière</h4>
+        <p class="text-sm text-gray-600">Vue sur la forêt, idéale pour les amoureux de la nature.</p>
+      </div>
+      <div class="bg-white rounded shadow p-4">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" class="rounded mb-4" alt="Cabane 2">
+        <h4 class="text-xl font-semibold">Cabane Panoramique</h4>
+        <p class="text-sm text-gray-600">Vue imprenable sur les montagnes, confort moderne.</p>
+      </div>
+      <div class="bg-white rounded shadow p-4">
+        <img src="https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62" class="rounded mb-4" alt="Cabane 3">
+        <h4 class="text-xl font-semibold">Cabane Rétro</h4>
+        <p class="text-sm text-gray-600">Ambiance vintage, parfaite pour un week-end cosy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section id="booking" class="bg-white py-12 px-4">
+    <div class="max-w-xl mx-auto">
+      <h3 class="text-3xl font-bold mb-6 text-center">Réserver une cabane</h3>
+      <form id="bookingForm" class="space-y-4">
+        <input type="text" id="name" placeholder="Votre nom" class="w-full border p-2 rounded" required />
+        <input type="email" id="email" placeholder="Votre email" class="w-full border p-2 rounded" required />
+        <select id="cabin" class="w-full border p-2 rounded" required>
+          <option value="">Choisissez une cabane</option>
+          <option value="forest">Cabane Forestière</option>
+          <option value="panoramic">Cabane Panoramique</option>
+          <option value="retro">Cabane Rétro</option>
+        </select>
+        <input type="date" id="date" class="w-full border p-2 rounded" required />
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">Réserver</button>
+      </form>
+      <p id="confirmation" class="mt-4 text-green-700 font-semibold hidden">Réservation envoyée !</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white text-center py-4">
+    &copy; 2025 Cabanes Nature. Tous droits réservés.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Menu mobile toggle
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    });
+
+    // Booking form validation
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const cabin = document.getElementById('cabin').value;
+      const date = document.getElementById('date').value;
+
+      if (name && email && cabin && date) {
+        document.getElementById('confirmation').classList.remove('hidden');
+        this.reset();
+      } else {
+        alert('Veuillez remplir tous les champs.');
+      }
+    });
+  </script>
+</body>
+    </html>
+        
