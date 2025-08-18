@@ -68,9 +68,12 @@
         <input type="email" id="email" placeholder="Votre email" class="w-full border p-2 rounded" required />
         <select id="cabin" class="w-full border p-2 rounded" required>
           <option value="">Choisissez une cabane</option>
-          <option value="forest">Cabane Forestière</option>
-          <option value="panoramic">Cabane Panoramique</option>
-          <option value="retro">Cabane Rétro</option>
+          <option value="passe c+">Passe Cabane+</option>
+          <option value="cb">Carte bancaire</option>
+          <option value="espèce">Espèce</option>
+          <option value="chèque">Chèque</option>
+          <option value="numérique">PayPal ou autre service de payement numérique</option>
+          <option value="indev:alture pay">Alture Pay (Indisponible)</option>
         </select>
         <input type="date" id="date" class="w-full border p-2 rounded" required />
         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500">Réserver</button>
@@ -81,7 +84,7 @@
 
   <!-- Footer -->
   <footer class="bg-green-700 text-white text-center py-4">
-    &copy; 2025 Cabanes Nature. Tous droits réservés.
+    &copy; 2025 Alture. Tous droits réservés.
   </footer>
 
   <!-- JavaScript -->
@@ -97,10 +100,10 @@
       e.preventDefault();
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
-      const cabin = document.getElementById('cabin').value;
+      const cabin = document.getElementById('payement').value;
       const date = document.getElementById('date').value;
 
-      if (name && email && cabin && date) {
+      if (name && email && payement && date) {
         document.getElementById('confirmation').classList.remove('hidden');
         this.reset();
       } else {
