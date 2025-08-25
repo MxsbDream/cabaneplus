@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cabane+ - plus qu'une simple cabane</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body class="bg-blue-50 min-h-screen">
+  <div class="max-w-3xl mx-auto py-8">
+    <h1 class="text-5xl font-extrabold text-center text-blue-900 mb-2">Cabane+</h1>
+    <p class="text-center text-lg text-blue-600 mb-8 font-semibold">plus qu'une simple cabane</p>
+
+    <!-- Tabs -->
+    <div class="flex justify-center mb-6">
+      <button id="tab-discover" class="tab-btn px-4 py-2 mr-2 bg-blue-200 rounded hover:bg-blue-300 font-semibold" onclick="showTab('discover')">Découvrir</button>
+      <button id="tab-publish" class="tab-btn px-4 py-2 mr-2 bg-blue-200 rounded hover:bg-blue-300 font-semibold" onclick="showTab('publish')">Publier</button>
+      <button id="tab-passes" class="tab-btn px-4 py-2 mr-2 bg-blue-200 rounded hover:bg-blue-300 font-semibold" onclick="showTab('passes')">Passes</button>
+      <button id="tab-profile" class="tab-btn px-4 py-2 bg-blue-200 rounded hover:bg-blue-300 font-semibold" onclick="showTab('profile')">Profil</button>
+    </div>
+
+    <!-- Découvrir / Réserver -->
+    <div id="tab-content-discover" class="tab-content">
+      <h2 class="text-2xl font-semibold mb-4">Liste des cabanes</h2>
+      <div id="cabins-list" class="grid grid-cols-1 gap-4"></div>
+    </div>
+
+    <!-- Publier une cabane -->
+    <div id="tab-content-publish" class="tab-content hidden">
+      <h2 class="text-2xl font-semibold mb-4">Publier une cabane</h2>
+      <form id="publish-form" class="bg-white shadow p-4 rounded space-y-3">
+        <input required type="text" id="cabin-title" placeholder="Titre de la cabane" class="w-full px-3 py-2 border rounded" />
+        <textarea required id="cabin-desc" placeholder="Description" class="w-full px-3 py-2 border rounded"></textarea>
+        <input required type="number" id="cabin-price" placeholder="Prix par nuit (€)" class="w-full px-3 py-2 border rounded" min="1" />
+        <input required type="url" id="cabin-img" placeholder="Lien image" class="w-full px-3 py-2 border rounded" />
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Publier</button>
+      </form>
+    </div>
+
+    <!-- Passes / Cartes cadeaux -->
+    <div id="tab-content-passes" class="tab-content hidden">
+      <h2 class="text-2xl font-semibold mb-4">Créer un pass (carte cadeau)</h2>
+      <form id="pass-form" class="bg-white shadow p-4 rounded space-y-3 mb-6">
+        <input required type="email" id="pass-email" placeholder="Email du destinataire" class="w-full px-3 py-2 border rounded" />
+        <input required type="text" id="pass-name" placeholder="Nom du destinataire" class="w-full px-3 py-2 border rounded" />
+        <input required type="number" id="pass-value" placeholder="Valeur du pass (€)" min="1" class="w-full px-3 py-2 border rounded" />
+        <label class="block font-semibold">Méthode de paiement :</label>
+        <select id="pass-payment" class="w-full px-3 py-2 border rounded">
+          <option value="CB">Carte Bancaire</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Carte Cadeau">Carte Cadeau</option>
+        </select>
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Créer le pass</button>
+      </form>
+      <h3 class="text-xl font-semibold mb-2">Mes passes</h3>
+      <ul id="my-passes" class="space-y-2"></ul>
+    </div>
+
+    <!-- Profil / Réservations -->
+    <div id="tab-content-profile" class="tab-content hidden">
+      <h2 class="text-2xl font-semibold mb-4">Mon profil</h2>
+      <h3 class="font-semibold mb-2">Mes réservations</h3>
+      <ul id="my-bookings" class="space-y-2"></ul>
+    </div>
+  </div>
+
+  <!-- Modal réservation -->
+  <div id="booking-modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded shadow-lg p-6 w-full max-w-md">
+      <h2 class="text-xl font-bold mb-2">Réserver <span id="modal-cabin-title"></span></h2>
+      <form id="booking-form" class="space-y-3">
+        <input required type="email" id="booking-email" placeholder="Votre email" class="w-full px-3 py-2 border rounded" />
+        <label class="block font-semibold">Méthode de paiement :</label>
+        <select id="booking-payment" class="w-full px-3 py-2 border rounded">
+          <option value="CB">Carte Bancaire</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Carte Cadeau">Carte Cadeau</option>
+        </select>
+        <input required type="date" id="booking-date" class="w-full px-3 py-2 border rounded" />
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Réserver</button>
+        <button type="button" onclick="toggleModal(false)" class="w-full mt-2 bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded">Annuler</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="email.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Initialisation EmailJS
+    (function(){
+      emailjs.init("TON_USER_ID_EMAILJS"); // Remplace par ton user ID EmailJS
+    })();
+  </script>
+</body>
+  </html>
