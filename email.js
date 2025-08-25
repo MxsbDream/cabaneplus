@@ -8,5 +8,5 @@
  * @returns {Promise}
  */
 function sendEmail(templateId, params) {
-  return emailjs.send("template_rzhs70i", templateId, params)
+  return emailjs.send("service_xkt9bow", templateId, params)
 }
