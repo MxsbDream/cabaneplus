@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.reset();
     // Envoi email via EmailJS
     try {
-      await sendEmail("TEMPLATE_ID_PASS", {to_email: email, to_name: name, pass_value: value, payment_method: payment});
+      await sendEmail("template_rzhs70i", {to_email: email, to_name: name, pass_value: value, payment_method: payment});
       alert('Carte cadeau créée et email envoyé !');
     } catch (e) {
       alert("Erreur lors de l'envoi de l'email");
